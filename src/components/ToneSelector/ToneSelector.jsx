@@ -42,21 +42,25 @@ const ToneSelector = ({ selectedTone, handleChange }) => {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+
+    //reset timer
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
+    //find the tone that the user selected
     const selectedToneObj = tones.find((tone) => tone._id === selectedId);
 
     if (selectedToneObj && selectedToneObj.fileUrl) {
       const audioPreview = new Audio(`${BASE_URL}${selectedToneObj.fileUrl}`);
-      audioRef.current = audioPreview;
-      audioPreview.play();
+      audioRef.current = audioPreview; //store the audio object in a reference that won't re-render the page when it changes
+      audioPreview.play(); //start playing the audio clip
 
       timeoutRef.current = setTimeout(() => {
-        audioPreview.pause();
-        audioPreview.currentTime = 0;
-      }, 5000);
+        //timeoutRef points to a setTimeout object
+        audioPreview.pause(); //this code will run (pause the audio)
+        audioPreview.currentTime = 0; //after a set amount of time
+      }, 5000); //in this case,it's 5 seconds
     }
   };
 
