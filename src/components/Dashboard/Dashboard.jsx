@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-
 import { UserContext } from '../../contexts/UserContext';
-
 import * as userService from '../../services/userService';
+import Clock from '../clock/Clock';
+
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -29,10 +29,8 @@ const Dashboard = () => {
         Or what about an alarm to remind you to get your butt out of bed so that you can go on that pre-work run? We've got you covered there too. 
         Never run late again with [APP NAME].</p>
         <div>
-        //clock goes here//
+          <Clock />
         </div>
-        {/* //TO-DO: add event handler to button to take user to /alarms-new page */}
-        <button className='add-alarm-btn'>Add Alarm</button>
     </main>
   );
 };
