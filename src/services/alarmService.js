@@ -45,6 +45,7 @@ const show = async (alarmId) => {
   }
 };
 
+//DELETE route /alarms/:alarmId
 const deleteAlarm = async (alarmId) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}}`, {
@@ -58,6 +59,8 @@ const deleteAlarm = async (alarmId) => {
     console.error(err);
   }
 };
+
+//PUT route /alarms/:alarmId
 
 const update = async (alarmId, alarmFormData) => {
   try {
@@ -74,3 +77,5 @@ const update = async (alarmId, alarmFormData) => {
     console.log(err);
   }
 };
+
+export { index, create, show, deleteAlarm, update };
