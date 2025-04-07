@@ -8,6 +8,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 
 import { UserContext } from './contexts/UserContext';
+import AlarmForm from './components/alarmForm/alarmForm';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
+        <Route path='/alarms' element={<AlarmForm />}/>
       </Routes>
     </>
   );
