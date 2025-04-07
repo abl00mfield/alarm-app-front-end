@@ -3,7 +3,6 @@ import { UserContext } from '../../contexts/UserContext';
 import * as userService from '../../services/userService';
 import Clock from '../clock/Clock';
 
-
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [ users, setUsers ] = useState([]);
@@ -31,6 +30,7 @@ const Dashboard = () => {
         <div>
           <Clock />
         </div>
+        <div></div>
     </main>
   );
 };
