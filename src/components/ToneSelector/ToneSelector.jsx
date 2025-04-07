@@ -54,6 +54,7 @@ const ToneSelector = ({ selectedTone, handleChange }) => {
     if (selectedToneObj && selectedToneObj.fileUrl) {
       const audioPreview = new Audio(`${BASE_URL}${selectedToneObj.fileUrl}`);
       audioRef.current = audioPreview; //store the audio object in a reference that won't re-render the page when it changes
+      audioPreview.loop = true;
       audioPreview.play(); //start playing the audio clip
 
       timeoutRef.current = setTimeout(() => {
