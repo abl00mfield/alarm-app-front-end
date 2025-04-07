@@ -1,37 +1,36 @@
 import { useEffect, useState } from 'react';
 
 const Clock = () => {
-    // const [time, setTime] = useState(new Date());;
-    const initialState = '00:00:00'
-    const [time, setTime] = useState(initialState)
+    const [time, setTime] = useState(new Date());
     //we'll want to setTime to be hour/minute/day
 
-    // //setInterval(() => {
-          let am;
+  //      setTime(currentTime);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+          let amOrPm = "AM";
           let date = new Date();
-          hour = date.getHours();
-          minute = date.getMinutes();
-          second = date.getSeconds();
+          let hour = date.getHours();
+          let minute = date.getMinutes();
+          let second = date.getSeconds();
 
           if(hour > 12){
             hour = hour - 12;
           }
 
           if(hour > 12){
-            am = false;
-          }else{
-            am = false;
+            amOrPm = "PM";
           }
 
-          hour = 
-    //   })
+          hour = hour == '0' ? 0 : hour;
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //       setTime(new Date());
-    //     }, 1000);
-    //     return () => clearInterval(timer);
-    //   }, []);
+          minute = minute < 10 ? '0' + minute : minute;
+          second = second < 10 ? '0' + second : second;
+          setTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(timer);
+      }, []);
 
       return (
           <div className='elementContainer'>
