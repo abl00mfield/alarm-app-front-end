@@ -31,6 +31,7 @@ const create = async (alarmFormData) => {
 };
 
 //GET show route, show a single alarm
+//alarm/:alarmId
 const show = async (alarmId) => {
   try {
     const res = await fetch(`${BASE_URL}/${alarmId}`, {
