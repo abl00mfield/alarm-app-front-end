@@ -41,6 +41,20 @@ const show = async (alarmId) => {
     });
     return res.json();
   } catch (err) {
-    console.error(error);
+    console.error(err);
+  }
+};
+
+const deleteAlarm = async (alarmId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${hootId}}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (err) {
+    console.error(err);
   }
 };
