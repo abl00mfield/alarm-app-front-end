@@ -1,5 +1,7 @@
-import { useState } from "react"
-import ToneSelector from "../ToneSelector/ToneSelector"
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router';
+import ToneSelector from "../ToneSelector/ToneSelector";
+import * as alarmService from '../../services/alarmService'
 
 const AlarmForm = (props) => {
 
@@ -19,14 +21,29 @@ const AlarmForm = (props) => {
     //use for scaffolding alarm submit fn
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('testing')
+        if(alarmId) {
+            props.handleUpdateAlarm(alarmId, formData)
+        }else{
+            props.Alarm(formData);
+        }
     }
 
-    //console.log('this is the alarm form')
+      useEffect(() => {
+        const fetchAlarm = async () => {
+            const alarmData = await alarmService.show(alarmId)
+            setFormData(alarmData);
+        }
+        if(alarmId) fetchAlarm();
+    
+        return () => {
+            setFormData({name: '', time: '', tone: ''})
+        }
+    }, [alarmId])
+
+
     return(
         <main>
             <h2>Add New Alarm</h2>
-            {/* <h1>{hootId ? 'Edit Hoot' : 'New Hoot'}</h1> */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor='name-input'>Name</label>
                 <input 
