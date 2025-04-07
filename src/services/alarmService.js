@@ -58,3 +58,19 @@ const deleteAlarm = async (alarmId) => {
     console.error(err);
   }
 };
+
+const update = async (alarmId, alarmFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${alarmId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(alarmFormData),
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
