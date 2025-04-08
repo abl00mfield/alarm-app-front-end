@@ -32,8 +32,9 @@ function App() {
 
   // handleAddAlarm to go to /alarms
   const handleAddAlarm = async (alarmFormData) => {
-    const newAlarm = await alarmService.create(alarmFormData);
-    setAlarms([newAlarm, ...alarms]);
+    await alarmService.create(alarmFormData);
+    const fetchedAlarms = await alarmService.index();
+    setAlarms(fetchedAlarms);
     navigate("/alarms");
   };
 
