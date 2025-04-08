@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import ToneSelector from "../ToneSelector/ToneSelector";
 import * as alarmService from "../../services/alarmService";
 
 const AlarmForm = (props) => {
   const { alarmId } = useParams();
+  const audioRef = useRef(null); //this is a container for the audio object that is created in the tone selector
 
   const [formData, setFormData] = useState({
     name: "",
@@ -26,6 +27,12 @@ const AlarmForm = (props) => {
   //use for scaffolding alarm submit fn
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (audioRef.current) {
+      //stop any audio that is playing
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
 
     if (alarmId) {
       props.handleUpdateAlarm(alarmId, formData);
@@ -76,6 +83,7 @@ const AlarmForm = (props) => {
         <ToneSelector
           selectedTone={formData.tone}
           handleChange={handleChange}
+          audioRef={audioRef}
         />
         <div>
           <label htmlFor="snoozeOn">Snooze:</label>

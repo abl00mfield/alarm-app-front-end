@@ -2,10 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import { index } from "../../services/toneService";
 const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
-const ToneSelector = ({ selectedTone, handleChange }) => {
+const ToneSelector = ({ selectedTone, handleChange, audioRef }) => {
   const [tones, setTones] = useState([]);
   const [loading, setLoading] = useState(true);
-  const audioRef = useRef(null);
+
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -55,12 +55,13 @@ const ToneSelector = ({ selectedTone, handleChange }) => {
       const audioPreview = new Audio(`${BASE_URL}${selectedToneObj.fileUrl}`);
       audioRef.current = audioPreview; //store the audio object in a reference that won't re-render the page when it changes
       audioPreview.loop = true;
-      audioPreview.play(); //start playing the audio clip
+      audioPreview.play().catch((err) => console.error("Audio Error: ", err)); //start playing the audio clip
 
       timeoutRef.current = setTimeout(() => {
         //timeoutRef points to a setTimeout object
         audioPreview.pause(); //this code will run (pause the audio)
         audioPreview.currentTime = 0; //after a set amount of time
+        audioRef.current = null;
       }, 2000); //in this case,it's 2seconds
     }
   };
