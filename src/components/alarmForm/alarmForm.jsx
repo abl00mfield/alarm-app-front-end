@@ -5,6 +5,8 @@ import * as alarmService from '../../services/alarmService'
 
 const AlarmForm = (props) => {
 
+    const {alarmId} = useParams();
+
     const [formData, setFormData] = useState({
         name: '',
         time: '',
@@ -24,25 +26,14 @@ const AlarmForm = (props) => {
         if(alarmId) {
             props.handleUpdateAlarm(alarmId, formData)
         }else{
-            props.Alarm(formData);
+            props.handleAddAlarm(formData);
         }
     }
-
-      useEffect(() => {
-        const fetchAlarm = async () => {
-            const alarmData = await alarmService.show(alarmId)
-            setFormData(alarmData);
-        }
-        if(alarmId) fetchAlarm();
-    
-        return () => {
-            setFormData({name: '', time: '', tone: ''})
-        }
-    }, [alarmId])
 
 
     return(
         <main>
+            <h1>{alarmId ? 'Edit Alarm' : 'New Alarm'}</h1>
             <h2>Add New Alarm</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='name-input'>Name</label>

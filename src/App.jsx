@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState} from 'react';
 import { Routes, Route, useNavigate } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
@@ -8,7 +8,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import AlarmForm from './components/AlarmForm/AlarmForm';
 
-import * as alarmService from '../../services/alarmService'
+import * as alarmService from './services/alarmService.js'
 import { UserContext } from './contexts/UserContext';
 
 function App() {
@@ -24,18 +24,18 @@ function App() {
     navigate('/alarms');
   };
 
-  const handleDeleteAlarm = async (alarmId) => {
-    const deletedAlarm = await alarmService.deleteAlarm(alarmId);
-    setAlarms(alarms.filter((alarm) => alarm.id !== deletedAlarm._id));
-    navigate('/alarms');
-  };
+  // const handleDeleteAlarm = async (alarmId) => {
+  //   const deletedAlarm = await alarmService.deleteAlarm(alarmId);
+  //   setAlarms(alarms.filter((alarm) => alarm.id !== deletedAlarm._id));
+  //   navigate('/alarms');
+  // };
 
-  const handleUpdateAlarm = async (alarmId, alarmFormData) => {
-    const updatedAlarm = await alarmService.updateAlarm(alarmId, alarmFormData);
-    setAlarms((alarms.map((alarm) => alarmId === alarm._id ? updatedAlarm : alarm)));
+  // const handleUpdateAlarm = async (alarmId, alarmFormData) => {
+  //   const updatedAlarm = await alarmService.updateAlarm(alarmId, alarmFormData);
+  //   setAlarms((alarms.map((alarm) => alarmId === alarm._id ? updatedAlarm : alarm)));
 
-    navigate(`/alarms/${alarmId}`);
-  };
+  //   navigate(`/alarms/${alarmId}`);
+  // };
 
   return (
     <>
@@ -45,8 +45,8 @@ function App() {
         {user ? (
           <>
             <Route path='/alarms/new' element={<AlarmForm handleAddAlarm={handleAddAlarm} />} />
-            <Route path='/alarms/:alarmId' element={<AlarmDetails handleDeleteAlarm={handleDeleteAlarm} />} />
-            <Route path='/alarms/:alarmId/edit' element={<AlarmForm handleUpdateAlarm={handleUpdateAlarm} />} />
+            {/* <Route path='/alarms/:alarmId' element={<AlarmDetails handleDeleteAlarm={handleDeleteAlarm} />} /> */}
+            {/* <Route path='/alarms/:alarmId/edit' element={<AlarmForm handleUpdateAlarm={handleUpdateAlarm} />} /> */}
           </>
         ) : (
           <>

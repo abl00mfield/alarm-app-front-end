@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
 const Clock = () => {
     const [time, setTime] = useState(new Date());
@@ -39,7 +40,8 @@ const Clock = () => {
                 {time.toLocaleTimeString()}
             </div>
             {/* //TO-DO: add event handler to button to take user to /alarms-new page*/}
-            <button className='add-alarm-btn'>Add Alarm</button>
+            {/* <button className='add-alarm-btn'>Add Alarm</button> */}
+            <li><Link to='/alarms/new'>Add Alarm</Link></li>
           </div>
       );
 }
