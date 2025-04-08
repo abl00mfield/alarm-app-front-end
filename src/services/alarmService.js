@@ -7,7 +7,8 @@ const index = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch (err) {
     console.error(error);
   }

@@ -1,15 +1,28 @@
-import { useContext, useState} from 'react';
-import { Routes, Route, useNavigate } from 'react-router';
 
-import NavBar from './components/NavBar/NavBar';
-import SignUpForm from './components/SignUpForm/SignUpForm';
-import SignInForm from './components/SignInForm/SignInForm';
-import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
-import AlarmForm from './components/AlarmForm/AlarmForm';
+import { useContext } from "react";
+import { Routes, Route } from "react-router";
 
-import * as alarmService from './services/alarmService.js'
-import { UserContext } from './contexts/UserContext';
+import NavBar from "./components/NavBar/NavBar";
+import SignUpForm from "./components/SignUpForm/SignUpForm";
+import SignInForm from "./components/SignInForm/SignInForm";
+import Landing from "./components/Landing/Landing";
+import Dashboard from "./components/Dashboard/Dashboard";
+import { UserContext } from "./contexts/UserContext";
+
+useEffect(() => {
+  //lets fetch all the current user's alarms and pass down to the clock component so it has access to them
+  const fetchAlarms = async () => {
+    try {
+      const fetchedAlarms = await alarmService.index();
+      setAlarms(fetchedAlarms);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  if (user) fetchAlarms();
+  console.log("alarms: ", alarms);
+}, [user]);
+
 
 function App() {
   const { user } = useContext(UserContext);
