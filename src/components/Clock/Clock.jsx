@@ -1,22 +1,49 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from 'react-router';
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
 
 const Clock = (props) => {
     const [time, setTime] = useState(new Date());
-    const [alarmTime, setAlarmTime] = useState()
+    // const [alarmTime, setAlarmTime] = useState()
     const [alarmActive, setAlarmActive] = useState(false);
-    //we'll want to setTime to be hour/minute/day
+    const audioRef = useRef(null);
+    const alarmTimeoutRef = useRef(null);
+    const triggeredAlarmsRef = useRef(new Set());
 
+  const triggerAlarm = (alarm) => {
+    const audio = new Audio(`${BASE_URL}${alarm.tone.fileUrl}`);
+    audio.loop = true;
+    audio.play();
+    audioRef.current = audio;
+    setAlarmActive(alarm);
+    alarmTimeoutRef.current = setTimeout(() => {
+      stopAlarm();
+    }, 5 * 60 * 1000); //turns the alarm off after 5 min
+  }
 
+  const stopAlarm = () => {
+    if(audioRef.current){
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.loop = false;
+      audioRef.current = null;
+    }
+    if(alarmTimeoutRef.current){
+      clearTimeout(alarmTimeoutRef.current);
+      alarmTimeoutRef.current.null;
+    }
+    setAlarmActive(null);
+  }
 
     useEffect(() => {
         const timer = setInterval(() => {
           let amOrPm = "AM";
-          let date = new Date();
-          let hour = date.getHours();
-          let minute = date.getMinutes();
-          let second = date.getSeconds();
+          let now = new Date();
+          let hour = now.getHours().toString().padStart(2, '0');
+          let minute = now.getMinutes().toString().padStart(2, '0');
+          let second = now.getSeconds().toString().padStart(2, '0');
+          const currentTimeStr = `${hour}:${minute}`;
 
           if(hour > 12){
             hour = hour - 12;
@@ -28,14 +55,25 @@ const Clock = (props) => {
 
           hour = hour == '0' ? 0 : hour;
 
-          minute = minute < 10 ? '0' + minute : minute;
-          second = second < 10 ? '0' + second : second;
-          setTime(new Date());
+          setTime(now);
+
+          props.alarms.forEach((alarm) => {
+            if (
+              alarm.time === currentTimeStr &&
+              alarm.active &&
+              !triggeredAlarmsRef.current.has(alarm._id)
+            ) {
+              triggerAlarm(alarm);
+              triggeredAlarmsRef.current.add(alarm._id);
+            }
+          });
+
         }, 1000);
 
         return () => clearInterval(timer);
-      }, []);
-
+      }, [props.alarms]);
+      
+      
       
 
       return (
@@ -44,6 +82,17 @@ const Clock = (props) => {
             <div className='clockContainer'>
                 {time.toLocaleTimeString()}
             </div>
+            {alarmActive && (
+            <div className="active-alarm">
+              <p>
+              :alarm_clock: Alarm is ringing:{" "}
+              <strong>{alarmActive.name || alarmActive.time}</strong>
+              </p>
+              <button onClick={stopAlarm} className="stop-alarm-btn">
+              Stop Alarm
+              </button>
+            </div>
+            )}
             {/* //TO-DO: add event handler to button to take user to /alarms-new page*/}
             {/* <button className='add-alarm-btn'>Add Alarm</button> */}
             <li><Link to='/alarms/new'>Add Alarm</Link></li>
