@@ -36,12 +36,6 @@ function App() {
     navigate("/alarms");
   };
 
-  // const handleDeleteAlarm = async (alarmId) => {
-  //   const deletedAlarm = await alarmService.deleteAlarm(alarmId);
-  //   setAlarms(alarms.filter((alarm) => alarm.id !== deletedAlarm._id));
-  //   navigate('/alarms');
-  // };
-
   const handleUpdateAlarm = async (alarmId, alarmFormData) => {
     const updatedAlarm = await alarmService.updateAlarm(alarmId, alarmFormData);
     setAlarms(
