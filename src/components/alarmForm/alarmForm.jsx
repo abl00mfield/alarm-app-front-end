@@ -19,7 +19,7 @@ const AlarmForm = (props) => {
     setFormData({
       ...formData,
       [name]:
-        name === "snoozeOn" || name === "active" ? value === "true" : value, //we have to convert the value of the string "true" to an actual boolean
+        name === "snoozeOn" || name === "active" ? value === "true" : value, //we have to convert the value of the boolean to a string
     });
   };
 
@@ -129,11 +129,7 @@ const AlarmForm = (props) => {
             </label>
           </div>
         )}
-        {alarmId ? (
-          <button type="submit">Edit Alarm</button>
-        ) : (
-          <button type="submit">Add Alarm</button>
-        )}
+        <button type="submit">{alarmId ? "Edit Alarm" : "Add Alarm"}</button>
       </form>
     </main>
   );
