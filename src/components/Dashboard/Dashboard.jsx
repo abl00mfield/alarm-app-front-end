@@ -1,36 +1,44 @@
-import { useEffect, useState, useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
-import * as userService from '../../services/userService';
-import Clock from '../clock/Clock';
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import * as alarmService from "../../services/alarmService";
+import Clock from "../Clock/Clock";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
-  const [ users, setUsers ] = useState([]);
+  const [alarms, setAlarms] = useState([]); //we will keep track of the alarms
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    //lets fetch all the current user's alarms and pass down to the clock component so it has access to them
+    const fetchAlarms = async () => {
       try {
-        const fetchedUsers = await userService.index();
-        setUsers(fetchedUsers);
+        const fetchedAlarms = await alarmService.index();
+        setAlarms(fetchedAlarms);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    if (user) fetchUsers();
+    };
+    if (user) fetchAlarms();
+    console.log("alarms: ", alarms);
   }, [user]);
 
+  console.log(alarms);
   return (
     <main>
-      <button className='snooze-btn'>Change Theme</button>
+      <button className="snooze-btn">Change Theme</button>
       <h1>APP NAME</h1>
-      <p>Do you have trouble keeping track of time? If so, you're not alone. Keep track of time with [APP NAME] by setting custom alarms. 
-        Need an alarm to remind you to take the chicken out of the freezer before your mom gets home? We got you. 
-        Or what about an alarm to remind you to get your butt out of bed so that you can go on that pre-work run? We've got you covered there too. 
-        Never run late again with [APP NAME].</p>
-        <div>
-          <Clock />
-        </div>
-        <div></div>
+      <p>
+        Do you have trouble keeping track of time? If so, you're not alone. Keep
+        track of time with [APP NAME] by setting custom alarms. Need an alarm to
+        remind you to take the chicken out of the freezer before your mom gets
+        home? We got you. Or what about an alarm to remind you to get your butt
+        out of bed so that you can go on that pre-work run? We've got you
+        covered there too. Never run late again with [APP NAME].
+      </p>
+      <div>
+        {/* we will pass down the current user's alarms to this component */}
+        <Clock />
+      </div>
+      <div></div>
     </main>
   );
 };

@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState } from "react";
 import { Link } from 'react-router';
 
 const Clock = () => {
-    const [time, setTime] = useState(new Date());
-    //we'll want to setTime to be hour/minute/day
+  const [time, setTime] = useState(new Date());
+  //we'll want to setTime to be hour/minute/day
 
   //      setTime(currentTime);
+
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -49,3 +51,4 @@ const Clock = () => {
 export default Clock
 
 // alarm clock logic TODO: 
+
