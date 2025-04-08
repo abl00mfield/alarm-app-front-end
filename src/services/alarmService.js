@@ -63,7 +63,7 @@ const deleteAlarm = async (alarmId) => {
 
 //PUT route /alarms/:alarmId
 
-const update = async (alarmId, alarmFormData) => {
+const updateAlarm = async (alarmId, alarmFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/${alarmId}`, {
       method: "PUT",
@@ -79,4 +79,4 @@ const update = async (alarmId, alarmFormData) => {
   }
 };
 
-export { index, create, show, deleteAlarm, update };
+export { index, create, show, deleteAlarm, updateAlarm };
