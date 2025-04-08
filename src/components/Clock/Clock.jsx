@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from "react";
+import { Link } from 'react-router';
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -6,42 +8,47 @@ const Clock = () => {
 
   //      setTime(currentTime);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      let amOrPm = "AM";
-      let date = new Date();
-      let hour = date.getHours();
-      let minute = date.getMinutes();
-      let second = date.getSeconds();
 
-      if (hour > 12) {
-        hour = hour - 12;
-      }
+    useEffect(() => {
+        const timer = setInterval(() => {
+          let amOrPm = "AM";
+          let date = new Date();
+          let hour = date.getHours();
+          let minute = date.getMinutes();
+          let second = date.getSeconds();
 
-      if (hour > 12) {
-        amOrPm = "PM";
-      }
+          if(hour > 12){
+            hour = hour - 12;
+          }
 
-      hour = hour == "0" ? 0 : hour;
+          if(hour > 12){
+            amOrPm = "PM";
+          }
 
-      minute = minute < 10 ? "0" + minute : minute;
-      second = second < 10 ? "0" + second : second;
-      setTime(new Date());
-    }, 1000);
+          hour = hour == '0' ? 0 : hour;
 
-    return () => clearInterval(timer);
-  }, []);
+          minute = minute < 10 ? '0' + minute : minute;
+          second = second < 10 ? '0' + second : second;
+          setTime(new Date());
+        }, 1000);
 
-  return (
-    <div className="elementContainer">
-      <h3>Current Time</h3>
-      <div className="clockContainer">{time.toLocaleTimeString()}</div>
-      {/* //TO-DO: add event handler to button to take user to /alarms-new page*/}
-      <button className="add-alarm-btn">Add Alarm</button>
-    </div>
-  );
-};
+        return () => clearInterval(timer);
+      }, []);
 
-export default Clock;
+      return (
+          <div className='elementContainer'>
+            <h3>Current Time</h3>
+            <div className='clockContainer'>
+                {time.toLocaleTimeString()}
+            </div>
+            {/* //TO-DO: add event handler to button to take user to /alarms-new page*/}
+            {/* <button className='add-alarm-btn'>Add Alarm</button> */}
+            <li><Link to='/alarms/new'>Add Alarm</Link></li>
+          </div>
+      );
+}
 
-// alarm clock logic TODO:
+export default Clock
+
+// alarm clock logic TODO: 
+
