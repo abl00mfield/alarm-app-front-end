@@ -7,7 +7,8 @@ const index = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch (err) {
     console.error(error);
   }
@@ -48,7 +49,7 @@ const show = async (alarmId) => {
 //DELETE route /alarms/:alarmId
 const deleteAlarm = async (alarmId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${hootId}}`, {
+    const res = await fetch(`${BASE_URL}/${alarmId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -62,7 +63,7 @@ const deleteAlarm = async (alarmId) => {
 
 //PUT route /alarms/:alarmId
 
-const update = async (alarmId, alarmFormData) => {
+const updateAlarm = async (alarmId, alarmFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/${alarmId}`, {
       method: "PUT",
@@ -78,4 +79,4 @@ const update = async (alarmId, alarmFormData) => {
   }
 };
 
-export { index, create, show, deleteAlarm, update };
+export { index, create, show, deleteAlarm, updateAlarm };
