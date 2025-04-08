@@ -36,9 +36,8 @@ const Dashboard = () => {
       </p>
       <div>
         {/* we will pass down the current user's alarms to this component */}
-        <Clock />
+        <Clock alarms={alarms}/>
       </div>
-      <div></div>
     </main>
   );
 };
