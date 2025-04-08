@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { Link } from 'react-router';
+import { useContext } from "react";
+import { Link } from "react-router";
 
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from "../../contexts/UserContext";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
 
   const handleSignOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
   };
 
@@ -16,15 +16,32 @@ const NavBar = () => {
       {user ? (
         <ul>
           <li>APP NAME</li>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/alarms'>Your Alarms</Link></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/alarms">Your Alarms</Link>
+          </li>
+          <li>
+            <Link to="alarms/new">Create a new Alarm</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={handleSignOut}>
+              Sign Out
+            </Link>
+          </li>
         </ul>
       ) : (
         <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/sign-in">Sign In</Link>
+          </li>
+          <li>
+            <Link to="/sign-up">Sign Up</Link>
+          </li>
         </ul>
       )}
     </nav>
