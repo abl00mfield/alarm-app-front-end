@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import { Routes, Route } from "react-router";
 
@@ -23,7 +22,6 @@ useEffect(() => {
   console.log("alarms: ", alarms);
 }, [user]);
 
-
 function App() {
   const { user } = useContext(UserContext);
   const [alarms, setAlarms] = useState([]);
@@ -31,10 +29,10 @@ function App() {
 
   // handleAddAlarm to go to /alarms
   const handleAddAlarm = async (alarmFormData) => {
-    console.log('alarmFormData: ', alarmFormData);
+    console.log("alarmFormData: ", alarmFormData);
     const newAlarm = await alarmService.create(alarmFormData);
     setAlarms([newAlarm, ...alarms]);
-    navigate('/alarms');
+    navigate("/alarms");
   };
 
   // const handleDeleteAlarm = async (alarmId) => {
@@ -54,18 +52,21 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path='/' element={user ? <Dashboard /> : <Landing />} />
+        <Route path="/" element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            <Route path='/alarms/new' element={<AlarmForm handleAddAlarm={handleAddAlarm} />} />
+            <Route path="/alarms" element={<AlarmList alarms={alarms} />} />
+            <Route
+              path="/alarms/new"
+              element={<AlarmForm handleAddAlarm={handleAddAlarm} />}
+            />
             {/* <Route path='/alarms/:alarmId' element={<AlarmDetails handleDeleteAlarm={handleDeleteAlarm} />} /> */}
             {/* <Route path='/alarms/:alarmId/edit' element={<AlarmForm handleUpdateAlarm={handleUpdateAlarm} />} /> */}
           </>
         ) : (
           <>
-            <Route path='/sign-up' element={<SignUpForm />} />
-            <Route path='/sign-in' element={<SignInForm />} />
-            <Route path='/alarms' element={<AlarmForm />} />
+            <Route path="/sign-up" element={<SignUpForm />} />
+            <Route path="/sign-in" element={<SignInForm />} />
           </>
         )}
       </Routes>
