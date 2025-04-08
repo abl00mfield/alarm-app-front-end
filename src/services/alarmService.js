@@ -49,7 +49,7 @@ const show = async (alarmId) => {
 //DELETE route /alarms/:alarmId
 const deleteAlarm = async (alarmId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${hootId}}`, {
+    const res = await fetch(`${BASE_URL}/${alarmId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { UserContext } from "./contexts/UserContext";
 import AlarmForm from "./components/AlarmForm/AlarmForm";
 import AlarmList from "./components/AlarmList/AlarmList";
+import AlarmDetails from "./components/AlarmDetails/AlarmDetails";
 import * as alarmService from "./services/alarmService";
 
 function App() {
