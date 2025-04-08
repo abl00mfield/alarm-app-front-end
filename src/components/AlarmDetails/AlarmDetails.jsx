@@ -16,6 +16,11 @@ const AlarmDetails = (props) => {
       setAlarm(alarmData);
     };
     fetchAlarm();
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, [alarmId]);
 
   const playTone = () => {
@@ -38,8 +43,8 @@ const AlarmDetails = (props) => {
 
   return (
     <main>
-      <h1>{alarm.name}</h1>
-      <h2>Time: {alarm.time}</h2>
+      <h1>{alarm.time}</h1>
+      <h2>Name: {alarm.name}</h2>
       <h2>Tone: {alarm.tone?.toneName}</h2>
       {alarm.snoozeOn ? <h2>Snooze is on </h2> : <h2>Snooze is off</h2>}
       {alarm.active ? <h2>Alarm is on </h2> : <h2>Alarm is off</h2>}
