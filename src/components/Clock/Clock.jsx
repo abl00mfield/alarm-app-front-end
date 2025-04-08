@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 
-const Clock = () => {
+const Clock = (props) => {
     const [time, setTime] = useState(new Date());
+    const [alarmTime, setAlarmTime] = useState()
+    const [alarmActive, setAlarmActive] = useState(false);
     //we'll want to setTime to be hour/minute/day
 
-  //      setTime(currentTime);
+
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -33,6 +35,8 @@ const Clock = () => {
         return () => clearInterval(timer);
       }, []);
 
+      
+
       return (
           <div className='elementContainer'>
             <h3>Current Time</h3>
@@ -49,3 +53,7 @@ const Clock = () => {
 export default Clock
 
 // alarm clock logic TODO: 
+      //we will need to check the time against any alarms that are set and active in the database
+      //first check to see if an alarm is currently active
+      //then use if statement to check if hour and minute on clock match the alarm's values
+      //if these have been met, play the tone associated with that alarmID
