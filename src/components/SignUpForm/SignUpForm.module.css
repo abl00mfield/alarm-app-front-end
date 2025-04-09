@@ -1,19 +1,15 @@
-body {
-  background-image: url(src/assets/neutral-sun-bg.jpg); 
-   margin: 0;
-   margin-top: 20px;
- 
-   /* display: flex;
-   place-items: center;
-   min-width: 320px;*/
-   min-height: 100vh; 
-
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
 
 .container {
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 5rem auto;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
@@ -53,6 +49,7 @@ label {
 }
 
 input {
+  background-color: #fff;
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -79,11 +76,11 @@ button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
 
 button[type='submit'] {
   background-color: #4f46e5;
