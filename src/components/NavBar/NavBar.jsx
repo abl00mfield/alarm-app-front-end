@@ -19,15 +19,12 @@ const NavBar = () => {
       {user ? (
         <div className={styles.navContainer}>
           <ul>
-            <li>APP NAME</li>
+            <li>Alarm Mate</li>
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/alarms">Your Alarms</Link>
-            </li>
-            <li>
-              <Link to="alarms/new">Create a new Alarm</Link>
             </li>
             <li>
               <Link to="/" onClick={handleSignOut}>
