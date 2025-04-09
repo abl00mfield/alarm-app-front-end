@@ -9,7 +9,7 @@ const AlarmList = ({ alarms }) => {
           <Link key={alarm._id} to={`/alarms/${alarm._id}`}>
             <div className="singleAlarm">
               <h2>{alarm.time}</h2>
-              <p>Name: {alarm.name}</p>
+              <p>Name: {formatTimeTo12Hour(alarm.name)}</p>
               {/* {alarm.snoozeOn ? <p>Snooze is on</p> : <p>Snooze is off</p>} */}
               {alarm.active ? (
                 <p>Alarm is active</p>
