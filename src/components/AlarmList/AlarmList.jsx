@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { formatTimeTo12Hour } from "../../utils/timeUtils";
 //what do we want to display in our list of all alarms?
 const AlarmList = ({ alarms }) => {
   return (
@@ -6,7 +7,7 @@ const AlarmList = ({ alarms }) => {
       {alarms.map((alarm) => (
         <Link key={alarm._id} to={`/alarms/${alarm._id}`}>
           <div>
-            <h2>{alarm.time}</h2>
+            <h2>{formatTimeTo12Hour(alarm.time)}</h2>
             <p>Name: {alarm.name}</p>
             {/* {alarm.snoozeOn ? <p>Snooze is on</p> : <p>Snooze is off</p>} */}
             {alarm.active ? <p>Alarm is active</p> : <p>Alarm is not active</p>}
