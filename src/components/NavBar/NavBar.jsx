@@ -13,10 +13,6 @@ const NavBar = () => {
     setUser(null);
   };
 
-
-
-  // style={{ backgroundImage: `url(${currentBackground})` }}
-
   return (
   <>
     <nav className={styles.container}>
