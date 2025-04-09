@@ -1,109 +1,114 @@
-
 import { useEffect, useState, useRef } from "react";
-import { Link } from 'react-router';
+import { Link } from "react-router";
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
 
 const Clock = (props) => {
-    const [time, setTime] = useState(new Date());
-    // const [alarmTime, setAlarmTime] = useState()
-    const [alarmActive, setAlarmActive] = useState(false);
-    const audioRef = useRef(null);
-    const alarmTimeoutRef = useRef(null);
-    const triggeredAlarmsRef = useRef(new Set());
+  const [time, setTime] = useState(new Date());
+
+  const [alarmActive, setAlarmActive] = useState(false);
+  const audioRef = useRef(null);
+  const alarmTimeoutRef = useRef(null);
+  const triggeredAlarmsRef = useRef(new Set());
 
   const triggerAlarm = (alarm) => {
-    const audio = new Audio(`${BASE_URL}${alarm.tone.fileUrl}`);
-    audio.loop = true;
-    audio.play();
-    audioRef.current = audio;
-    setAlarmActive(alarm);
-    alarmTimeoutRef.current = setTimeout(() => {
-      stopAlarm();
-    }, 5 * 60 * 1000); //turns the alarm off after 5 min
-  }
+    if (alarm.tone && alarm.tone.fileUrl) {
+      const audio = new Audio(`${BASE_URL}${alarm.tone.fileUrl}`);
+      audio.loop = true;
+      audio.play();
+      audioRef.current = audio;
+      setAlarmActive(alarm);
+      alarmTimeoutRef.current = setTimeout(() => {
+        stopAlarm();
+      }, 5 * 60 * 1000); //turns the alarm off after 5 min
+    }
+  };
 
   const stopAlarm = () => {
-    if(audioRef.current){
+    if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       audioRef.current.loop = false;
       audioRef.current = null;
     }
-    if(alarmTimeoutRef.current){
+    if (alarmTimeoutRef.current) {
       clearTimeout(alarmTimeoutRef.current);
       alarmTimeoutRef.current.null;
     }
     setAlarmActive(null);
-  }
+  };
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-          let amOrPm = "AM";
-          let now = new Date();
-          let hour = now.getHours().toString().padStart(2, '0');
-          let minute = now.getMinutes().toString().padStart(2, '0');
-          let second = now.getSeconds().toString().padStart(2, '0');
-          const currentTimeStr = `${hour}:${minute}`;
+  const snoozeAlarm = () => {
+    const snoozeDelay = 9 * 60 * 1000; //9 minutes
 
-          if(hour > 12){
-            hour = hour - 12;
-          }
+    stopAlarm();
 
-          if(hour > 12){
-            amOrPm = "PM";
-          }
+    alarmTimeoutRef.current = setTimeout(() => {
+      triggerAlarm(alarmActive);
+    }, snoozeDelay);
+  };
 
-          hour = hour == '0' ? 0 : hour;
+  useEffect(() => {
+    const timer = setInterval(() => {
+      let now = new Date();
+      let hour = now.getHours().toString().padStart(2, "0");
+      let minute = now.getMinutes().toString().padStart(2, "0");
 
-          setTime(now);
+      const currentTimeStr = `${hour}:${minute}`;
 
-          props.alarms.forEach((alarm) => {
-            if (
-              alarm.time === currentTimeStr &&
-              alarm.active &&
-              !triggeredAlarmsRef.current.has(alarm._id)
-            ) {
-              triggerAlarm(alarm);
-              triggeredAlarmsRef.current.add(alarm._id);
-            }
-          });
+      setTime(now);
 
-        }, 1000);
+      props.alarms.forEach((alarm) => {
+        if (
+          alarm.time === currentTimeStr &&
+          alarm.active &&
+          !triggeredAlarmsRef.current.has(alarm._id)
+        ) {
+          triggerAlarm(alarm);
+          triggeredAlarmsRef.current.add(alarm._id);
+        }
+      });
+    }, 1000);
 
-        return () => clearInterval(timer);
-      }, [props.alarms]);
-      
-      
-      
+    return () => {
+      clearInterval(timer);
+      if (alarmTimeoutRef.current) {
+        clearTimeout(alarmTimeoutRef.current);
+        alarmTimeoutRef.current = null;
+      }
+    };
+  }, [props.alarms]);
 
-      return (
-          <div className='elementContainer'>
-            <h3>Current Time</h3>
-            <div className='clockContainer'>
-                {time.toLocaleTimeString()}
-            </div>
-            {alarmActive && (
-            <div className="active-alarm">
-              <p>
-              :alarm_clock: Alarm is ringing:{" "}
-              <strong>{alarmActive.name || alarmActive.time}</strong>
-              </p>
-              <button onClick={stopAlarm} className="stop-alarm-btn">
-              Stop Alarm
-              </button>
-            </div>
-            )}
-            {/* //TO-DO: add event handler to button to take user to /alarms-new page*/}
-            {/* <button className='add-alarm-btn'>Add Alarm</button> */}
-            <li><Link to='/alarms/new'>Add Alarm</Link></li>
-          </div>
-      );
-}
+  return (
+    <div className="elementContainer">
+      <h3>Current Time</h3>
+      <div className="clockContainer">
+        {time.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        })}
+      </div>
+      {alarmActive && (
+        <div className="active-alarm">
+          <p>
+            Alarm is ringing:{" "}
+            <strong>{alarmActive.name || alarmActive.time}</strong>
+          </p>
+          <button onClick={stopAlarm} className="stop-alarm-btn">
+            Stop Alarm
+          </button>
+          {alarmActive.snoozeOn && (
+            <button onClick={snoozeAlarm} className="snooze-alarm-btn">
+              Snooze 9 Min
+            </button>
+          )}
+        </div>
+      )}
+      <li>
+        <Link to="/alarms/new">Add Alarm</Link>
+      </li>
+    </div>
+  );
+};
 
-export default Clock
-
-// alarm clock logic TODO: 
-      //we will need to check the time against any alarms that are set and active in the database
-      //first check to see if an alarm is currently active
-      //then use if statement to check if hour and minute on clock match the alarm's values
-      //if these have been met, play the tone associated with that alarmID
+export default Clock;
