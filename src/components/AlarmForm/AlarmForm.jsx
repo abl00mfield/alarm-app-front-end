@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import ToneSelector from "../ToneSelector/ToneSelector";
 import * as alarmService from "../../services/alarmService";
+import Clock from "../Clock/Clock";
 
 const AlarmForm = (props) => {
   const { alarmId } = useParams();
@@ -60,6 +61,7 @@ const AlarmForm = (props) => {
 
   return (
     <main>
+      <Clock alarms={props.alarms} />
       <h1>{alarmId ? "Edit Alarm" : "New Alarm"}</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name-input">Name</label>
