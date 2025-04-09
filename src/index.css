@@ -59,15 +59,6 @@ h1 {
   line-height: 1.1;
 }
 
-/* .elementContainer{
-  display: flex;
-  margin: auto;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-} */
-
 .alarmContainer{
   display: flex;
   flex-direction: column;
@@ -104,7 +95,7 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #7d4529;
 }
 button:focus,
 button:focus-visible {
