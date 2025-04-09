@@ -12,7 +12,7 @@ const AlarmList = ({ alarms }) => {
             <div className="singleAlarm">
               <h2>{formatTimeTo12Hour(alarm.time)}</h2>
               <p>Name: {alarm.name}</p>
-
+              {/* {alarm.snoozeOn ? <p>Snooze is on</p> : <p>Snooze is off</p>} */}
               {alarm.active ? (
                 <p>Alarm is active</p>
               ) : (

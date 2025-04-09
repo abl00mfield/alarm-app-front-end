@@ -3,7 +3,6 @@ import Clock from "../Clock/Clock";
 const Dashboard = ({ alarms }) => {
   return (
     <main>
-      <button className="snooze-btn">Change Theme</button>
       <h1>Alarm Mate</h1>
       <p>
         Do you have trouble keeping track of time? If so, you're not alone. Keep
@@ -18,7 +17,7 @@ const Dashboard = ({ alarms }) => {
         <Clock alarms={alarms} />
       </div>
     </main>
-  );
+  ); 
 };
 
 export default Dashboard;
