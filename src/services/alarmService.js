@@ -9,7 +9,7 @@ const index = async () => {
     });
     const data = await res.json();
     return data;
-  } catch (err) {
+  } catch (error) {
     console.error(error);
   }
 };
@@ -26,8 +26,8 @@ const create = async (alarmFormData) => {
       body: JSON.stringify(alarmFormData),
     });
     return res.json();
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 

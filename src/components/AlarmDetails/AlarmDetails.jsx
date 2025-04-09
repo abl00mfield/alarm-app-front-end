@@ -3,6 +3,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useParams, Link } from "react-router";
 import * as alarmService from "../../services/alarmService";
+import { formatTimeTo12Hour } from "../../utils/timeUtils";
 
 const AlarmDetails = (props) => {
   const [alarm, setAlarm] = useState(null);
@@ -43,7 +44,7 @@ const AlarmDetails = (props) => {
 
   return (
     <main>
-      <h1>{alarm.time}</h1>
+      <h1>{formatTimeTo12Hour(alarm.time)}</h1>
       <h2>Name: {alarm.name}</h2>
       <h2>Tone: {alarm.tone?.toneName}</h2>
       {alarm.snoozeOn ? <h2>Snooze is on </h2> : <h2>Snooze is off</h2>}
