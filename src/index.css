@@ -42,7 +42,16 @@ body {
   min-width: 320px;*/
   min-height: 100vh; 
 }
-main {
+
+body.light-theme{
+  background-image: url(src/assets/neutral-sun-bg.jpg);
+}
+
+body.dark-theme{
+  background-image: url(src/assets/dark-sun-bg.jpg);
+}
+
+main{
   padding-top: 60px;
 }
 

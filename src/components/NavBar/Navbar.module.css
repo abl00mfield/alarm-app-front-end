@@ -6,11 +6,12 @@
     display: flex;
     position: fixed;
     padding: 1rem 2rem;
+    padding-left: 0;
     align-items: center;
     background-color:#e76f51;
     border-bottom: 1px solid rgb(200, 200, 200);
     box-sizing: border-box; 
-  overflow: hidden;  
+    overflow: hidden;  
   }
   
  .container ul {
@@ -20,13 +21,24 @@
     list-style: none;
     font-weight: bold;
     align-items: center;
-    
+    padding-left: 0;
   }  
   
   .container li {
     margin-left: 1rem;
     
   }
+
+  .navContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* .themeBtn{
+
+  } */
+
   .left {
     flex: 1;
     text-align: left;
