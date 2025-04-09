@@ -37,6 +37,16 @@ const Clock = (props) => {
     setAlarmActive(null);
   };
 
+  const snoozeAlarm = () => {
+    const snoozeDelay = 9 * 60 * 1000; //9 minutes
+
+    stopAlarm();
+
+    alarmTimeoutRef.current = setTimeout(() => {
+      triggerAlarm(alarmActive);
+    }, snoozeDelay);
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       let now = new Date();
@@ -59,7 +69,13 @@ const Clock = (props) => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (alarmTimeoutRef.current) {
+        clearTimeout(alarmTimeoutRef.current);
+        alarmTimeoutRef.current = null;
+      }
+    };
   }, [props.alarms]);
 
   return (
@@ -81,6 +97,11 @@ const Clock = (props) => {
           <button onClick={stopAlarm} className="stop-alarm-btn">
             Stop Alarm
           </button>
+          {alarmActive.snoozeOn && (
+            <button onClick={snoozeAlarm} className="snooze-alarm-btn">
+              Snooze 9 Min
+            </button>
+          )}
         </div>
       )}
       <li>
