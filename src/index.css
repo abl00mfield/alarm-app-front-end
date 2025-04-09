@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,14 +27,21 @@ li{
 }
 
 
+
 body {
-  background-image: url(src/assets/neutral-sun-bg.jpg);
+ background-image: url(src/assets/neutral-sun-bg.jpg); 
   margin: 0;
   margin-top: 20px;
+  background-size: cover;
+  background-position: center;
+
   /* display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh; */
+  min-width: 320px;*/
+  min-height: 100vh; 
+}
+main {
+  padding-top: 60px;
 }
 
 .themeBtn{
