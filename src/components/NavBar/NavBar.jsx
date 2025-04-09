@@ -31,9 +31,6 @@ const NavBar = () => {
               <Link to="/alarms">Your Alarms</Link>
             </li>
             <li>
-              <Link to="alarms/new">Create a new Alarm</Link>
-            </li>
-            <li>
               <Link to="/" onClick={handleSignOut}>
                 Sign Out
               </Link>
