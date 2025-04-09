@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
-import styles from './SignUp.module.css';
+import styles from './SignUpForm.module.css';
 
 
 
