@@ -12,8 +12,6 @@ import AlarmList from "./components/AlarmList/AlarmList";
 import AlarmDetails from "./components/AlarmDetails/AlarmDetails";
 import * as alarmService from "./services/alarmService";
 
-
-
 function App() {
   const { user } = useContext(UserContext);
   const [alarms, setAlarms] = useState([]);
@@ -59,7 +57,10 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+        <Route
+          path="/"
+          element={user ? <Dashboard alarms={alarms} /> : <Landing />}
+        />
         {user ? (
           <>
             <Route path="/alarms" element={<AlarmList alarms={alarms} />} />
@@ -78,10 +79,8 @@ function App() {
           </>
         ) : (
           <>
-          
             <Route path="/sign-up" element={<SignUpForm />} />
             <Route path="/sign-in" element={<SignInForm />} />
-           
           </>
         )}
       </Routes>
