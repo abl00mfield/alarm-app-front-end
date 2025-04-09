@@ -13,7 +13,9 @@ const NavBar = () => {
   };
 
   return (
+
     <nav className={styles.container}>
+
       {user ? (
         <ul>
           <li>APP NAME</li>
@@ -50,6 +52,10 @@ const NavBar = () => {
         </ul>
       )}
     </nav>
+    <div>
+      <button className='themeBtn'>Change Theme</button>
+    </div>
+    </>
   );
 };
 
