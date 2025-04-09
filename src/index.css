@@ -29,7 +29,7 @@ li {
 }
 
 body {
-  background-image: url(src/assets/neutral-sun-bg.jpg);
+  background-image: url("/neutral-sun-bg.jpg");
   margin: 0;
   margin-top: 20px;
   min-height: 100vh;
@@ -39,11 +39,11 @@ body {
 }
 
 body.light-theme {
-  background-image: url(src/assets/neutral-sun-bg.jpg);
+  background-image: url("/images/neutral-sun-bg.jpg");
 }
 
 body.dark-theme {
-  background-image: url(src/assets/dark-sun-bg.jpg);
+  background-image: url("/images/dark-sun-bg.jpg");
 }
 
 main {
