@@ -62,7 +62,7 @@ const ToneSelector = ({ selectedTone, handleChange, audioRef }) => {
         audioPreview.pause(); //this code will run (pause the audio)
         audioPreview.currentTime = 0; //after a set amount of time
         audioRef.current = null;
-      }, 2000); //in this case,it's 2seconds
+      }, 4000); //in this case,it's 4seconds
     }
   };
 
