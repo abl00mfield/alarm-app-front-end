@@ -12,6 +12,7 @@ const Clock = (props) => {
   const triggeredAlarmsRef = useRef(new Set());
 
   const triggerAlarm = (alarm) => {
+    console.log("alarm is triggered", alarm);
     if (alarm.tone && alarm.tone.fileUrl) {
       const audio = new Audio(`${BASE_URL}${alarm.tone.fileUrl}`);
       audio.loop = true;
