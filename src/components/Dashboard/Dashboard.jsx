@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <main>
       <button className="snooze-btn">Change Theme</button>
-      <h1>APP NAME</h1>
+      <h1>Alarm Mate</h1>
       <p>
         Do you have trouble keeping track of time? If so, you're not alone. Keep
         track of time with [APP NAME] by setting custom alarms. Need an alarm to
