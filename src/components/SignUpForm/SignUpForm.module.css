@@ -50,6 +50,7 @@ label {
 
 input {
   background-color: #fff;
+  color: black;
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;

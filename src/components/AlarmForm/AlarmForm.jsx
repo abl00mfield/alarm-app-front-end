@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import ToneSelector from "../ToneSelector/ToneSelector";
 import * as alarmService from "../../services/alarmService";
+import  styles from './AlarmForm.module.css';
+
 
 const AlarmForm = (props) => {
   const { alarmId } = useParams();
@@ -59,9 +61,11 @@ const AlarmForm = (props) => {
   }, [alarmId]);
 
   return (
-    <main>
+    <main classname={styles.container}>
+    <div className={styles.container}>
       <h1>{alarmId ? "Edit Alarm" : "New Alarm"}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}className={styles.form}>
+      <div className={styles.field}>
         <label htmlFor="name-input">Name</label>
         <input
           required
@@ -71,6 +75,8 @@ const AlarmForm = (props) => {
           value={formData.name}
           onChange={handleChange}
         />
+        </div>
+        <div className={styles.field}>
         <label htmlFor="time">Time</label>
         <input
           required
@@ -80,12 +86,15 @@ const AlarmForm = (props) => {
           value={formData.time}
           onChange={handleChange}
         />
+        </div>
+        <div className={styles.field}>
         <ToneSelector
           selectedTone={formData.tone}
           handleChange={handleChange}
           audioRef={audioRef}
         />
-        <div>
+        </div>
+        <div className={styles.radioGroup}>
           <label htmlFor="snoozeOn">Snooze:</label>
           <label htmlFor="snoozeOn-on">
             <input
@@ -111,7 +120,7 @@ const AlarmForm = (props) => {
           </label>
         </div>
         {alarmId && (
-          <div>
+          <div className={styles.radioGroup}>
             <label htmlFor="active">Alarm on:</label>
             <label htmlFor="active-on">
               <input
@@ -137,8 +146,9 @@ const AlarmForm = (props) => {
             </label>
           </div>
         )}
-        <button type="submit">{alarmId ? "Edit Alarm" : "Add Alarm"}</button>
+        <button type="submit"className={styles.button}>{alarmId ? "Edit Alarm" : "Add Alarm"}</button>
       </form>
+      </div>
     </main>
   );
 };
