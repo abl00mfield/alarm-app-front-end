@@ -1,10 +1,24 @@
+body {
+  background-image: url(src/assets/neutral-sun-bg.jpg); 
+   margin: 0;
+   margin-top: 20px;
+ 
+   /* display: flex;
+   place-items: center;
+   min-width: 320px;*/
+   min-height: 100vh; 
+
+}
+
+
 .container {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
 }
 
 h1 {
@@ -17,8 +31,8 @@ h1 {
 .message {
   text-align: center;
   color: #e63946;
+  font-size: 0.9rem;
   margin-bottom: 1rem;
-  font-weight: 500;
 }
 
 .form {
@@ -32,47 +46,58 @@ h1 {
   flex-direction: column;
 }
 
-.field label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
+label {
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: #444;
 }
 
-.field input {
-  padding: 0.5rem;
+input {
+  padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
+  transition: border 0.2s ease;
 }
 
-.field input:focus {
-  border-color: #0077ff;
+input:focus {
+  border-color: #4f46e5;
+  outline: none;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.buttons button {
+button {
   padding: 0.6rem 1.2rem;
-  font-size: 1rem;
   border: none;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  background-color: #0077ff;
-  color: #fff;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease;
 }
 
-.buttons button:disabled {
-  background-color: #999;
+button:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-.buttons button:hover:not(:disabled) {
-  background-color: #005fd1;
+button[type='submit'] {
+  background-color: #4f46e5;
+  color: white;
+}
+
+button[type='submit'] {
+  background-color: #4338ca;
+}
+
+button[type='button'] {
+  background-color: #f3f4f6;
+}
+
+button[type='button'] :hover {
+  background-color: #ebe5e8;
 }
