@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router";
+import { formatTimeTo12Hour } from "../../utils/timeUtils";
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
 
 const Clock = (props) => {
@@ -92,7 +93,9 @@ const Clock = (props) => {
         <div className="active-alarm">
           <p>
             Alarm is ringing:{" "}
-            <strong>{alarmActive.name || alarmActive.time}</strong>
+            <strong>
+              {alarmActive.name || formatTimeTo12Hour(alarmActive.time)}
+            </strong>
           </p>
           <button onClick={stopAlarm} className="stop-alarm-btn">
             Stop Alarm
