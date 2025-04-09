@@ -18,10 +18,8 @@ const Dashboard = () => {
       }
     };
     if (user) fetchAlarms();
-    console.log("alarms: ", alarms);
   }, [user]);
 
-  console.log(alarms);
   return (
     <main>
       <button className="snooze-btn">Change Theme</button>
@@ -36,7 +34,7 @@ const Dashboard = () => {
       </p>
       <div>
         {/* we will pass down the current user's alarms to this component */}
-        <Clock alarms={alarms}/>
+        <Clock alarms={alarms} />
       </div>
     </main>
   );
