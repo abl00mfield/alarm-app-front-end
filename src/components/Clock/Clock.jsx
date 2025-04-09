@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { formatTimeTo12Hour } from "../../utils/timeUtils";
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
 
+import styles from "./Clock.module.css";
+
 const Clock = (props) => {
   const [time, setTime] = useState(new Date());
 
@@ -81,37 +83,39 @@ const Clock = (props) => {
   }, [props.alarms]);
 
   return (
-    <div className="elementContainer">
-      <h3>Current Time</h3>
-      <div className="clockContainer">
-        {time.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })}
-      </div>
-      {alarmActive && (
-        <div className="active-alarm">
-          <p>
-            Alarm is ringing:{" "}
-            <strong>
-              {alarmActive.name || formatTimeTo12Hour(alarmActive.time)}
-            </strong>
-          </p>
-          <button onClick={stopAlarm} className="stop-alarm-btn">
-            Stop Alarm
-          </button>
-          {alarmActive.snoozeOn && (
-            <button onClick={snoozeAlarm} className="snooze-alarm-btn">
-              Snooze 9 Min
-            </button>
-          )}
+    <>
+      <h3 className={styles.currentTime}>Current Time</h3>
+      <div className={styles.elementContainer}>
+        <div className={styles.clockContainer}>
+          {time.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
         </div>
-      )}
-      <li>
-        <Link to="/alarms/new">Add Alarm</Link>
-      </li>
-    </div>
+        {alarmActive && (
+          <div className="active-alarm">
+            <p>
+              Alarm is ringing:{" "}
+              <strong>
+                {alarmActive.name || formatTimeTo12Hour(alarmActive.time)}
+              </strong>
+            </p>
+            <button onClick={stopAlarm} className="stop-alarm-btn">
+              Stop Alarm
+            </button>
+            {alarmActive.snoozeOn && (
+              <button onClick={snoozeAlarm} className="snooze-alarm-btn">
+                Snooze 9 Min
+              </button>
+            )}
+          </div>
+        )}
+        <Link className={styles.addAlarmLink} to="/alarms/new">
+          Add Alarm
+        </Link>
+      </div>
+    </>
   );
 };
 

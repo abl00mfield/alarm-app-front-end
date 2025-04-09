@@ -45,6 +45,33 @@ const NavBar = () => {
                 <Link to="/">Home</Link>
               </li>
             </div>
+  <>
+    <nav className={styles.container}>
+      {user ? (
+        <div className={styles.navContainer}>
+          <ul>
+            <li>Alarm Mate</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/alarms">Your Alarms</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={handleSignOut}>
+                Sign Out
+              </Link>
+            </li>
+          </ul>
+          <ThemeToggle />
+        </div>
+      ) : (
+        <ul>
+          <div className={styles.left}>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          </div>
             <div className={styles.right}>
               <li>
                 <Link to="/sign-in">Sign In</Link>

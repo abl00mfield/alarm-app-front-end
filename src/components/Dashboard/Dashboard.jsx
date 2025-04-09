@@ -17,7 +17,7 @@ const Dashboard = ({ alarms }) => {
         <Clock alarms={alarms} />
       </div>
     </main>
-  ); 
+  );
 };
 
 export default Dashboard;
