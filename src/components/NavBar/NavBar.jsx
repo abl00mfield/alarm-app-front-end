@@ -13,7 +13,7 @@ const NavBar = () => {
   };
 
   return (
-
+      <>  
     <nav className={styles.container}>
 
       {user ? (
