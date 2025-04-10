@@ -1,11 +1,12 @@
-@font-face{
-    font-family: DS-DIGII;
-    src: url(public/fonts/DS-DIGII.TTF);
+@font-face {
+  font-family: DS-DIGII;
+  src: url("/fonts/DS-DIGII.TTF");
 }
 
-.currentTime{
-    text-align: center;
+.currentTime {
+  text-align: center;
 }
+
 
 .elementContainer{
     display: flex;
@@ -23,14 +24,15 @@
     width: 30%;
   }
 
-.clockContainer{
-    display: flex;
-    flex-direction: column;
-    font-family: DS-DIGII;
-    font-size: 64px;
-    font-weight: 500;
-    
+
+.clockContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: DS-DIGII;
+  font-size: 64px;
+  font-weight: 500;
 }
+
 
 .addAlarmLink{
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -51,3 +53,4 @@
     margin: auto;
     margin-bottom: 10px;
 }
+

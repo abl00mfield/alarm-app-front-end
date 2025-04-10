@@ -12,8 +12,6 @@ import AlarmList from "./components/AlarmList/AlarmList";
 import AlarmDetails from "./components/AlarmDetails/AlarmDetails";
 import * as alarmService from "./services/alarmService";
 
-
-
 function App() {
   const { user } = useContext(UserContext);
   const [alarms, setAlarms] = useState([]);
@@ -42,10 +40,11 @@ function App() {
 
   const handleUpdateAlarm = async (alarmId, alarmFormData) => {
     const updatedAlarm = await alarmService.updateAlarm(alarmId, alarmFormData);
-    setAlarms(
-      alarms.map((alarm) => (alarmId === alarm._id ? updatedAlarm : alarm))
+    const updatedAlarms = alarms.map((alarm) =>
+      alarmId === alarm._id ? updatedAlarm : alarm
     );
-
+    updatedAlarms.sort((a, b) => a.time.localeCompare(b.time));
+    setAlarms(updatedAlarms);
     navigate(`/alarms/${alarmId}`);
   };
 
@@ -59,29 +58,42 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+        <Route
+          path="/"
+          element={user ? <Dashboard alarms={alarms} /> : <Landing />}
+        />
         {user ? (
           <>
             <Route path="/alarms" element={<AlarmList alarms={alarms} />} />
             <Route
               path="/alarms/new"
-              element={<AlarmForm handleAddAlarm={handleAddAlarm} />}
+              element={
+                <AlarmForm alarms={alarms} handleAddAlarm={handleAddAlarm} />
+              }
             />
             <Route
               path="/alarms/:alarmId"
-              element={<AlarmDetails handleDeleteAlarm={handleDeleteAlarm} />}
+              element={
+                <AlarmDetails
+                  alarms={alarms}
+                  handleDeleteAlarm={handleDeleteAlarm}
+                />
+              }
             />
             <Route
               path="/alarms/:alarmId/edit"
-              element={<AlarmForm handleUpdateAlarm={handleUpdateAlarm} />}
+              element={
+                <AlarmForm
+                  alarms={alarms}
+                  handleUpdateAlarm={handleUpdateAlarm}
+                />
+              }
             />
           </>
         ) : (
           <>
-          
             <Route path="/sign-up" element={<SignUpForm />} />
             <Route path="/sign-in" element={<SignInForm />} />
-           
           </>
         )}
       </Routes>
