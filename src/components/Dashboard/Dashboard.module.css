@@ -1,13 +1,10 @@
 .introBlurb{
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgb(181, 149, 120);
-    opacity: .8;
-    border-radius: 4px;
-    font-weight: 700;
-    align-items: center;
-    margin: auto;
-    width: 50%;
-    background-color: rgb(254, 249, 243);
-    padding: 15px;
+    width: 500px;
+    margin: 5rem auto;
+    padding: 2rem;
+    padding-bottom: 30px;
+    background-color: #D9CAC7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.824);
+    font-family: 'Arial', sans-serif;
 }

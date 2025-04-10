@@ -41,10 +41,10 @@ const SignUpForm = () => {
     return !(username && password && password === passwordConf);
   };
 
-  return (
-    <div className={styles.pageWrapper}>
-    <main className={styles.container}>
-      <h1>Sign Up</h1>
+  return ( 
+    <main className={styles.pageWrapper}>
+      <div className={styles.container}>
+      <h1 className={styles.signUpHeader}>Sign Up</h1>
       <p className={styles.message}>{message}</p>
       <form onSubmit={handleSubmit}className={styles.form}>
       
@@ -100,8 +100,8 @@ const SignUpForm = () => {
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
+      </div>
     </main>
-    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { index } from "../../services/toneService";
+import styles from './ToneSelector.module.css';
 const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 const ToneSelector = ({ selectedTone, handleChange, audioRef }) => {
@@ -67,8 +68,8 @@ const ToneSelector = ({ selectedTone, handleChange, audioRef }) => {
   };
 
   return (
-    <>
-      <label htmlFor="tone">Select a tone:</label>
+    <div className={styles.tone}>
+      <label htmlFor="tone">Select a tone: </label>
       <select
         name="tone"
         id="tone"
@@ -84,7 +85,7 @@ const ToneSelector = ({ selectedTone, handleChange, audioRef }) => {
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };
 

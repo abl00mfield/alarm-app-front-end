@@ -5,8 +5,10 @@ import styles from './Landing.module.css'
 const Landing = () => {
   return (
     <main className={styles.landing}>
-      <h1>Hello, you are on the landing page for visitors.</h1>
-      <p>Sign up now, or sign in to see your super secret dashboard!</p>
+      <div className={styles.landingBlurb}>
+        <h1>Welcome to Alarm Mate</h1>
+        <p>Sign up now, or sign in to create your own personalized alarms!</p>
+      </div>
     </main>
   );
 };
