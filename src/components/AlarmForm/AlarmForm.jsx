@@ -61,7 +61,7 @@ const AlarmForm = (props) => {
   }, [alarmId]);
 
   return (
-    <main className={styles.container}>
+    <main className={styles.pageWrapper}>
       <div className={styles.container}>
         <Clock alarms={props.alarms} />
         <h1>{alarmId ? "Edit Alarm" : "New Alarm"}</h1>
@@ -151,7 +151,7 @@ const AlarmForm = (props) => {
             {alarmId ? "Edit Alarm" : "Add Alarm"}
           </button>
         </form>
-      </div>
+        </div>
     </main>
   );
 };

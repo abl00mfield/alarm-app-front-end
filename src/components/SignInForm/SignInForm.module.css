@@ -7,21 +7,22 @@
   }
   
   .container {
-    max-width: 400px;
-    margin: 2rem auto;
+    width: 400px;
+    margin: 5rem auto;
     padding: 2rem;
-    background-color: #21BBBB;
+    padding-bottom: 30px;
+    background-color: #D9CAC7;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.824);
     font-family: 'Arial', sans-serif;
   }
   
-  h1 {
+  /* h1 {
     text-align: center;
     margin-bottom: 1rem;
     font-size: 1.8rem;
     color: #333;
-  }
+  } */
   
   .message {
     text-align: center;
@@ -39,6 +40,8 @@
   .field {
     display: flex;
     flex-direction: column;
+    margin: 10px auto;
+    width: 60%;
   }
   
   label {
@@ -47,6 +50,10 @@
     color: #444;
   }
   
+  .field label{
+    color: #444;
+  }
+
   input {
     padding: 0.6rem;
     border: 1px solid #ccc;
@@ -62,7 +69,10 @@
   
   .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    padding-top: 10px;
+    margin: auto;
+    gap: 30px;
     margin-top: 1rem;
   }
   
@@ -81,12 +91,12 @@
   }
   
   button[type='submit'] {
-    background-color: #4f46e5;
+    background-color: #343D51;
     color: white;
   }
   
   button[type='submit']:hover:not(:disabled) {
-    background-color: #4338ca;
+    background-color: #53668e;
   }
   
   button[type='button'] {

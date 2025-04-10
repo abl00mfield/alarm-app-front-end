@@ -33,6 +33,7 @@
 
 .addAlarmLink {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 10px;
 }
 
 .alarmName {
@@ -49,4 +50,8 @@
   align-items: center;
   margin: auto;
   margin-bottom: 10px;
+}
+
+.alarmInfo p{
+    font-size: 2rem;
 }
