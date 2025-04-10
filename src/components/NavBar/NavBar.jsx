@@ -2,19 +2,19 @@ import { useContext, useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { UserContext } from "../../contexts/UserContext";
-import styles from './NavBar.module.css';
+import styles from "./NavBar.module.css";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
-
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
     setUser(null);
   };
 
+  // style={{ backgroundImage: `url(${currentBackground})` }}
+
   return (
-  <>
     <nav className={styles.container}>
       {user ? (
         <div className={styles.navContainer}>
@@ -37,22 +37,21 @@ const NavBar = () => {
       ) : (
         <ul>
           <div className={styles.left}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
           </div>
-            <div className={styles.right}>
-          <li>
-            <Link to="/sign-in">Sign In</Link>
-          </li>
-          <li>
-            <Link to="/sign-up">Sign Up</Link>
-          </li>
-            </div>
+          <div className={styles.right}>
+            <li>
+              <Link to="/sign-in">Sign In</Link>
+            </li>
+            <li>
+              <Link to="/sign-up">Sign Up</Link>
+            </li>
+          </div>
         </ul>
       )}
     </nav>
-  </>
   );
 };
 
