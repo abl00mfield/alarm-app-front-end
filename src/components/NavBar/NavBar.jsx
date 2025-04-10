@@ -15,37 +15,6 @@ const NavBar = () => {
   // style={{ backgroundImage: `url(${currentBackground})` }}
 
   return (
-    <>
-      <nav className={styles.container}>
-        {user ? (
-          <div className={styles.navContainer}>
-            <ul>
-              <li>APP NAME</li>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/alarms">Your Alarms</Link>
-              </li>
-              <li>
-                <Link to="alarms/new">Create a new Alarm</Link>
-              </li>
-              <li>
-                <Link to="/" onClick={handleSignOut}>
-                  Sign Out
-                </Link>
-              </li>
-            </ul>
-            <ThemeToggle />
-          </div>
-        ) : (
-          <ul>
-            <div className={styles.left}>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </div>
-  <>
     <nav className={styles.container}>
       {user ? (
         <div className={styles.navContainer}>
@@ -68,22 +37,21 @@ const NavBar = () => {
       ) : (
         <ul>
           <div className={styles.left}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
           </div>
-            <div className={styles.right}>
-              <li>
-                <Link to="/sign-in">Sign In</Link>
-              </li>
-              <li>
-                <Link to="/sign-up">Sign Up</Link>
-              </li>
-            </div>
-          </ul>
-        )}
-      </nav>
-    </>
+          <div className={styles.right}>
+            <li>
+              <Link to="/sign-in">Sign In</Link>
+            </li>
+            <li>
+              <Link to="/sign-up">Sign Up</Link>
+            </li>
+          </div>
+        </ul>
+      )}
+    </nav>
   );
 };
 
