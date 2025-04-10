@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
-import styles from './SignUp.module.css';
+import styles from './SignUpForm.module.css';
 
 
 
@@ -42,11 +42,12 @@ const SignUpForm = () => {
   };
 
   return (
+    <div className={styles.pageWrapper}>
     <main className={styles.container}>
       <h1>Sign Up</h1>
       <p className={styles.message}>{message}</p>
       <form onSubmit={handleSubmit}className={styles.form}>
-        
+      
         <div className={styles.field}>
           <label htmlFor='username'>Username:</label>
           <input
@@ -82,7 +83,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <label htmlFor='confirm'>Confirm Password:</label>
           <input
             type='password'
@@ -100,6 +101,7 @@ const SignUpForm = () => {
         </div>
       </form>
     </main>
+    </div>
   );
 };
 

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import { signIn } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
+import styles from './SignInForm.module.css';
+
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -31,11 +33,12 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
+     <div className={styles.pageWrapper}>
+        <main className={styles.container}>
       <h1>Sign In</h1>
-      <p>{message}</p>
+      <p className={styles.message}>{message}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
+        <div className={styles.field}>
           <label htmlFor='email'>Username:</label>
           <input
             type='text'
@@ -47,7 +50,8 @@ const SignInForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.field}>
+
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -59,12 +63,13 @@ const SignInForm = () => {
             required
           />
         </div>
-        <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className={styles.buttons}>
+          <button type='submit'>Sign In</button>
+          <button type='button' onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
+    </div>
   );
 };
 

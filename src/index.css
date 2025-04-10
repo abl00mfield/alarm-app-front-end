@@ -13,6 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  padding-top: 60px;
+}
 a {
   font-weight: 500;
   color: #4a280f;
@@ -21,35 +24,37 @@ a {
 a:hover {
   color: #653b1c;
 }
-li{
+li {
   list-style: none;
 }
 
-
 body {
-  background-image: url(src/assets/neutral-sun-bg.jpg);
+  background-image: url("/images/neutral-sun-bg.jpg");
   margin: 0;
   margin-top: 20px;
+  background-size: cover;
+  background-position: center;
   min-height: 100vh;
+
   /* display: flex;
   place-items: center;
   min-width: 320px; */
 }
 
-body.light-theme{
-  background-image: url('public/images/neutral-sun-bg.jpg');
+body.light-theme {
+  background-image: url("/images/neutral-sun-bg.jpg");
 }
 
-body.dark-theme{
-  background-image: url('public/images/dark-sun-bg.jpg');
+body.dark-theme {
+  background-image: url("/images/dark-sun-bg.jpg");
 }
 
-main{
+main {
   padding-top: 60px;
   padding-bottom: 40px;
 }
 
-.themeBtn{
+.themeBtn {
   position: absolute;
   right: 15px;
   margin-bottom: 20px;
@@ -60,7 +65,16 @@ h1 {
   line-height: 1.1;
 }
 
-.alarmContainer{
+.elementContainer {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.alarmContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,10 +82,10 @@ h1 {
   margin: auto;
 }
 
-.singleAlarm{
+.singleAlarm {
   border: 1px solid black;
   background-color: white;
-  opacity: .8;
+  opacity: 0.8;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
