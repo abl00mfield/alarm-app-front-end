@@ -1,6 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router";
+import { formatTimeTo12Hour } from "../../utils/timeUtils";
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
+//persist alarms across component mounts/unmounts
+const globalTriggerMap = new Map();
+
+import styles from "./Clock.module.css";
 
 const Clock = (props) => {
   const [time, setTime] = useState(new Date());
@@ -8,7 +13,8 @@ const Clock = (props) => {
   const [alarmActive, setAlarmActive] = useState(false);
   const audioRef = useRef(null);
   const alarmTimeoutRef = useRef(null);
-  const triggeredAlarmsRef = useRef(new Set());
+
+  const lastTriggerMapRef = useRef(globalTriggerMap); //this will keep track of an alarm so it won't be triggered more than once per minute
 
   const triggerAlarm = (alarm) => {
     if (alarm.tone && alarm.tone.fileUrl) {
@@ -58,13 +64,24 @@ const Clock = (props) => {
       setTime(now);
 
       props.alarms.forEach((alarm) => {
-        if (
+        const last = lastTriggerMapRef.current.get(alarm._id);
+        const shouldTrigger =
           alarm.time === currentTimeStr &&
           alarm.active &&
-          !triggeredAlarmsRef.current.has(alarm._id)
-        ) {
+          (!last ||
+            last.triggeredFor !== alarm.time ||
+            last.triggeredAt !== currentTimeStr);
+        // Only trigger the alarm if:
+        // - it's active
+        // - AND it has never triggered before
+        // - OR its time has changed since the last trigger
+        // - OR it hasn't already triggered at the current time
+        if (shouldTrigger) {
           triggerAlarm(alarm);
-          triggeredAlarmsRef.current.add(alarm._id);
+          lastTriggerMapRef.current.set(alarm._id, {
+            triggeredFor: alarm.time,
+            triggeredAt: currentTimeStr,
+          });
         }
       });
     }, 1000);
@@ -75,39 +92,51 @@ const Clock = (props) => {
         clearTimeout(alarmTimeoutRef.current);
         alarmTimeoutRef.current = null;
       }
+
+      // Stop the alarm sound if it's playing
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        audioRef.current.loop = false;
+        audioRef.current = null;
+      }
     };
   }, [props.alarms]);
 
   return (
-    <div className="elementContainer">
-      <h3>Current Time</h3>
-      <div className="clockContainer">
-        {time.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })}
-      </div>
-      {alarmActive && (
-        <div className="active-alarm">
-          <p>
-            Alarm is ringing:{" "}
-            <strong>{alarmActive.name || alarmActive.time}</strong>
-          </p>
-          <button onClick={stopAlarm} className="stop-alarm-btn">
-            Stop Alarm
-          </button>
-          {alarmActive.snoozeOn && (
-            <button onClick={snoozeAlarm} className="snooze-alarm-btn">
-              Snooze 9 Min
-            </button>
-          )}
+    <>
+      <h3 className={styles.currentTime}>Current Time</h3>
+      <div className={styles.elementContainer}>
+        <div className={styles.clockContainer}>
+          {time.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
         </div>
-      )}
-      <li>
-        <Link to="/alarms/new">Add Alarm</Link>
-      </li>
-    </div>
+        {alarmActive && (
+          <div className="active-alarm">
+            <p>
+              Alarm is ringing:{" "}
+              <strong>
+                {alarmActive.name || formatTimeTo12Hour(alarmActive.time)}
+              </strong>
+            </p>
+            <button onClick={stopAlarm} className="stop-alarm-btn">
+              Stop Alarm
+            </button>
+            {alarmActive.snoozeOn && (
+              <button onClick={snoozeAlarm} className="snooze-alarm-btn">
+                Snooze 9 Min
+              </button>
+            )}
+          </div>
+        )}
+        <Link className={styles.addAlarmLink} to="/alarms/new">
+          Add Alarm
+        </Link>
+      </div>
+    </>
   );
 };
 

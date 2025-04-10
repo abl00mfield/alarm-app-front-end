@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router";
 import * as alarmService from "../../services/alarmService";
 import { formatTimeTo12Hour } from "../../utils/timeUtils";
 import styles from "./AlarmDetails.module.css"
+import Clock from "../Clock/Clock";
 
 const AlarmDetails = (props) => {
   const [alarm, setAlarm] = useState(null);
@@ -48,8 +49,9 @@ const AlarmDetails = (props) => {
   if (!alarm) return <main>Loading.....</main>;
 
   return (
-     <div className={styles.wrapper}>
-     <main className={styles.card}>
+    <main className={styles.card}>
+    <Clock alarms={props.alarms} />
+    <div className={styles.wrapper}>
      <h1 className={styles.title}>{formatTimeTo12Hour(alarm.time)}</h1>
      <h2 className={styles.info}>Name: {alarm.name}</h2>
      <h2 className={styles.info}>Tone: {alarm.tone?.toneName}</h2>
@@ -58,25 +60,19 @@ const AlarmDetails = (props) => {
        ) : (
        <h2 className={styles.status}>Snooze is off</h2>
         )}
-
        {alarm.active ? (
        <h2 className={styles.status}>Alarm is on</h2>
       ) : (
        <h2 className={styles.status}>Alarm is off</h2>
       )}
-   
       <div className={styles.buttonGroup}>
-        <button onClick={playTone}className={styles.button}> ▶️ Play Tone</button>
-        <button onClick={stopTone}className={styles.button}>⏹️ Stop Tone</button>
+        <button onClick={playTone}className={styles.button}> :arrow_forward: Play Tone</button>
+        <button onClick={stopTone}className={styles.button}>:black_square_for_stop: Stop Tone</button>
       </div>
-      
       {alarm.owner._id === user._id && (
         <>
         <div className={styles.actions}>
           <Link to={`/alarms/${alarmId}/edit`} className={styles.link}>Edit</Link>
-         
-          
-         
           <button onClick={() => props.handleDeleteAlarm(alarmId)}
           className={`${styles.button} ${styles.deleteButton}`}
          >
@@ -84,9 +80,10 @@ const AlarmDetails = (props) => {
           </button>
         </div>
           </>
-      )}
+        )}
+        </div>
     </main>
-    </div>
+   
   );
 };
 export default AlarmDetails;

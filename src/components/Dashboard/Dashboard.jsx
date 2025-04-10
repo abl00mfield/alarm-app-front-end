@@ -1,28 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
-import * as alarmService from "../../services/alarmService";
 import Clock from "../Clock/Clock";
 
-const Dashboard = () => {
-  const { user } = useContext(UserContext);
-  const [alarms, setAlarms] = useState([]); //we will keep track of the alarms
-
-  useEffect(() => {
-    //lets fetch all the current user's alarms and pass down to the clock component so it has access to them
-    const fetchAlarms = async () => {
-      try {
-        const fetchedAlarms = await alarmService.index();
-        setAlarms(fetchedAlarms);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    if (user) fetchAlarms();
-  }, [user]);
-
+const Dashboard = ({ alarms }) => {
   return (
     <main>
-      <button className="snooze-btn">Change Theme</button>
       <h1>Alarm Mate</h1>
       <p>
         Do you have trouble keeping track of time? If so, you're not alone. Keep
