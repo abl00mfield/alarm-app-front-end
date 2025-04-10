@@ -93,10 +93,10 @@ const Clock = (props) => {
         </div>
         {alarmActive && (
           <div className={styles.activeAlarm}>
-            <img src='public/images/bell.gif' alt='ringing bell' className={styles.bellGif}/>
+            <img src='public/images/bell.gif' alt='ringing bell' width={140} height={140} className={styles.bellGif}/>
             <div className={styles.alarmInfo}>
-              <p>
-                Alarm is ringing:{" "}
+              <p className={styles.alarmName}>
+                {" "}
                 <strong>{alarmActive.name || alarmActive.time}</strong>
               </p>
               <button onClick={stopAlarm} className="stop-alarm-btn">
