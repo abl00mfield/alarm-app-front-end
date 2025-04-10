@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useParams, Link } from "react-router";
 import * as alarmService from "../../services/alarmService";
 import { formatTimeTo12Hour } from "../../utils/timeUtils";
+import styles from "./AlarmDetails.module.css"
 
 const AlarmDetails = (props) => {
   const [alarm, setAlarm] = useState(null);
@@ -13,9 +14,13 @@ const AlarmDetails = (props) => {
 
   useEffect(() => {
     const fetchAlarm = async () => {
+      try{
       const alarmData = await alarmService.show(alarmId);
       setAlarm(alarmData);
-    };
+    }catch(err){
+      console.error("Error fetching alarm:",err);
+    }
+  };
     fetchAlarm();
     return () => {
       if (audioRef.current) {
@@ -43,25 +48,45 @@ const AlarmDetails = (props) => {
   if (!alarm) return <main>Loading.....</main>;
 
   return (
-    <main>
-      <h1>{formatTimeTo12Hour(alarm.time)}</h1>
-      <h2>Name: {alarm.name}</h2>
-      <h2>Tone: {alarm.tone?.toneName}</h2>
-      {alarm.snoozeOn ? <h2>Snooze is on </h2> : <h2>Snooze is off</h2>}
-      {alarm.active ? <h2>Alarm is on </h2> : <h2>Alarm is off</h2>}
-      <div>
-        <button onClick={playTone}> ▶️ Play Tone</button>
-        <button onClick={stopTone}>⏹️ Stop Tone</button>
+     <div className={styles.wrapper}>
+     <main className={styles.card}>
+     <h1 className={styles.title}>{formatTimeTo12Hour(alarm.time)}</h1>
+     <h2 className={styles.info}>Name: {alarm.name}</h2>
+     <h2 className={styles.info}>Tone: {alarm.tone?.toneName}</h2>
+      {alarm.snoozeOn ? (
+      <h2 className={styles.status}>Snooze is on</h2>
+       ) : (
+       <h2 className={styles.status}>Snooze is off</h2>
+        )}
+
+       {alarm.active ? (
+       <h2 className={styles.status}>Alarm is on</h2>
+      ) : (
+       <h2 className={styles.status}>Alarm is off</h2>
+      )}
+   
+      <div className={styles.buttonGroup}>
+        <button onClick={playTone}className={styles.button}> ▶️ Play Tone</button>
+        <button onClick={stopTone}className={styles.button}>⏹️ Stop Tone</button>
       </div>
+      
       {alarm.owner._id === user._id && (
         <>
-          <Link to={`/alarms/${alarmId}/edit`}>Edit</Link>
-          <button onClick={() => props.handleDeleteAlarm(alarmId)}>
-            Delete
+        <div className={styles.actions}>
+          <Link to={`/alarms/${alarmId}/edit`} className={styles.link}>Edit</Link>
+         
+          
+         
+          <button onClick={() => props.handleDeleteAlarm(alarmId)}
+          className={`${styles.button} ${styles.deleteButton}`}
+         >
+        Delete
           </button>
-        </>
+        </div>
+          </>
       )}
     </main>
+    </div>
   );
 };
 export default AlarmDetails;
