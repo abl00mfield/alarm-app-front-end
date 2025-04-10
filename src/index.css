@@ -29,11 +29,12 @@ li {
 }
 
 body {
-  background-image: url("/neutral-sun-bg.jpg");
+  background-image: url("/images/neutral-sun-bg.jpg");
   margin: 0;
   margin-top: 20px;
   background-size: cover;
   background-position: center;
+  min-height: 100vh;
 
   /* display: flex;
   place-items: center;
