@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
-
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { UserContext } from "../../contexts/UserContext";
-import styles from './NavBar.module.css';
+import styles from "./NavBar.module.css";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
@@ -11,6 +11,8 @@ const NavBar = () => {
     localStorage.removeItem("token");
     setUser(null);
   };
+
+  // style={{ backgroundImage: `url(${currentBackground})` }}
 
   return (
     <nav className={styles.container}>

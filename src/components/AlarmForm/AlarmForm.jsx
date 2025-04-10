@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import ToneSelector from "../ToneSelector/ToneSelector";
 import * as alarmService from "../../services/alarmService";
+import styles from "./AlarmForm.module.css";
+import Clock from "../Clock/Clock";
 
 const AlarmForm = (props) => {
   const { alarmId } = useParams();
@@ -59,86 +61,97 @@ const AlarmForm = (props) => {
   }, [alarmId]);
 
   return (
-    <main>
-      <h1>{alarmId ? "Edit Alarm" : "New Alarm"}</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name-input">Name</label>
-        <input
-          required
-          type="text"
-          name="name"
-          id="name-input"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <label htmlFor="time">Time</label>
-        <input
-          required
-          type="time"
-          name="time"
-          id="time"
-          value={formData.time}
-          onChange={handleChange}
-        />
-        <ToneSelector
-          selectedTone={formData.tone}
-          handleChange={handleChange}
-          audioRef={audioRef}
-        />
-        <div>
-          <label htmlFor="snoozeOn">Snooze:</label>
-          <label htmlFor="snoozeOn-on">
+    <main className={styles.container}>
+      <div className={styles.container}>
+        <Clock alarms={props.alarms} />
+        <h1>{alarmId ? "Edit Alarm" : "New Alarm"}</h1>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.field}>
+            <label htmlFor="name-input">Name</label>
             <input
-              type="radio"
-              name="snoozeOn"
-              id="snoozeOn-on"
-              value="true"
-              checked={formData.snoozeOn === true}
+              required
+              type="text"
+              name="name"
+              id="name-input"
+              value={formData.name}
               onChange={handleChange}
             />
-            On
-          </label>
-          <label htmlFor="snoozeOn-off">
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="time">Time</label>
             <input
-              type="radio"
-              name="snoozeOn"
-              id="snoozeOn-off"
-              value="false"
-              checked={formData.snoozeOn === false}
+              required
+              type="time"
+              name="time"
+              id="time"
+              value={formData.time}
               onChange={handleChange}
             />
-            Off
-          </label>
-        </div>
-        {alarmId && (
-          <div>
-            <label htmlFor="active">Alarm on:</label>
-            <label htmlFor="active-on">
+          </div>
+          <div className={styles.field}>
+            <ToneSelector
+              selectedTone={formData.tone}
+              handleChange={handleChange}
+              audioRef={audioRef}
+            />
+          </div>
+          <div className={styles.radioGroup}>
+            <label htmlFor="snoozeOn">Snooze:</label>
+            <label htmlFor="snoozeOn-on">
               <input
                 type="radio"
-                id="active-on"
-                name="active"
+                name="snoozeOn"
+                id="snoozeOn-on"
                 value="true"
-                checked={formData.active === true}
+                checked={formData.snoozeOn === true}
                 onChange={handleChange}
               />
               On
             </label>
-            <label htmlFor="active-off">
+            <label htmlFor="snoozeOn-off">
               <input
                 type="radio"
-                id="active-off"
-                name="active"
+                name="snoozeOn"
+                id="snoozeOn-off"
                 value="false"
-                checked={formData.active === false}
+                checked={formData.snoozeOn === false}
                 onChange={handleChange}
               />
               Off
             </label>
           </div>
-        )}
-        <button type="submit">{alarmId ? "Edit Alarm" : "Add Alarm"}</button>
-      </form>
+          {alarmId && (
+            <div className={styles.radioGroup}>
+              <label htmlFor="active">Alarm on:</label>
+              <label htmlFor="active-on">
+                <input
+                  type="radio"
+                  id="active-on"
+                  name="active"
+                  value="true"
+                  checked={formData.active === true}
+                  onChange={handleChange}
+                />
+                On
+              </label>
+              <label htmlFor="active-off">
+                <input
+                  type="radio"
+                  id="active-off"
+                  name="active"
+                  value="false"
+                  checked={formData.active === false}
+                  onChange={handleChange}
+                />
+                Off
+              </label>
+            </div>
+          )}
+          <button type="submit" className={styles.button}>
+            {alarmId ? "Edit Alarm" : "Add Alarm"}
+          </button>
+        </form>
+      </div>
     </main>
   );
 };
