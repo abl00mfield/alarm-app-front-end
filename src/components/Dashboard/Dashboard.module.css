@@ -1,6 +1,7 @@
 .introBlurb{
     display: flex;
     flex-direction: column;
+    font-weight: 700;
     align-items: center;
     margin: auto;
     width: 50%;
