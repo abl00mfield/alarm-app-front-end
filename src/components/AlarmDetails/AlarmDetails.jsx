@@ -49,9 +49,9 @@ const AlarmDetails = (props) => {
   if (!alarm) return <main>Loading.....</main>;
 
   return (
-    <main className={styles.card}>
+    <main className={styles.wrapper}>
       <Clock alarms={props.alarms} />
-      <div className={styles.wrapper}>
+      <div className={styles.card}>
         <h1 className={styles.title}>{formatTimeTo12Hour(alarm.time)}</h1>
         <h2 className={styles.info}>Name: {alarm.name}</h2>
         <h2 className={styles.info}>Tone: {alarm.tone?.toneName}</h2>
