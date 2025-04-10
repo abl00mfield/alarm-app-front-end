@@ -92,14 +92,17 @@ const Clock = (props) => {
           })}
         </div>
         {alarmActive && (
-          <div className="active-alarm">
-            <p>
-              Alarm is ringing:{" "}
-              <strong>{alarmActive.name || alarmActive.time}</strong>
-            </p>
-            <button onClick={stopAlarm} className="stop-alarm-btn">
-              Stop Alarm
-            </button>
+          <div className={styles.activeAlarm}>
+            <img src='public/images/bell.gif' alt='ringing bell' className={styles.bellGif}/>
+            <div className={styles.alarmInfo}>
+              <p>
+                Alarm is ringing:{" "}
+                <strong>{alarmActive.name || alarmActive.time}</strong>
+              </p>
+              <button onClick={stopAlarm} className="stop-alarm-btn">
+                Stop Alarm
+              </button>
+            </div>
             {alarmActive.snoozeOn && (
               <button onClick={snoozeAlarm} className="snooze-alarm-btn">
                 Snooze 9 Min
