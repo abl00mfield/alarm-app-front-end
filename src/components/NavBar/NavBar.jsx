@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { UserContext } from "../../contexts/UserContext";
-import styles from "./NavBar.module.css";
+import styles from "./Navbar.module.css";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
