@@ -35,6 +35,13 @@
   margin: 10px;
 }
 
+.activeAlarm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .alarmName {
   font-size: 24px;
 }
@@ -49,4 +56,15 @@
 
 .alarmInfo p {
   font-size: 2rem;
+}
+
+.snoozeNotice {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #dd7e5e;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
