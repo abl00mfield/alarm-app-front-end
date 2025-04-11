@@ -22,7 +22,7 @@ For the planning of Alarm Mate, we created an ERD chart, wireframes, a routing c
 * Themes - users can change the theme of their app based on their preference for a light or dark mode 
 * Live Timekeeping - a clock widget is present on every page of the app when the user is logged in
 
-## Front-end Technologies Used
+## Front-End Technologies Used
 
 * React
 * CSS
@@ -32,6 +32,7 @@ For the planning of Alarm Mate, we created an ERD chart, wireframes, a routing c
 * Images: [Pixabay](https://pixabay.com/) 
 * Favicon: [Flaticon](https://www.flaticon.com/free-icons/clock)
 * Font: [Dafont](dafont.com)
+* Tones: [MixKit](https://mixkit.co/free-sound-effects/alarm/)
 
 
 ## Next Steps
