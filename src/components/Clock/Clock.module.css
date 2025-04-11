@@ -13,7 +13,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin-bottom: 20px; */
   border: 2px solid black;
   padding-bottom: 10px;
   background-color: rgb(255, 255, 255);
@@ -40,10 +39,6 @@
   font-size: 24px;
 }
 
-/* .activeAlarm{
-    margin-bottom: 20px;
-} */
-
 .alarmInfo {
   display: flex;
   flex-direction: column;
@@ -52,6 +47,6 @@
   margin-bottom: 10px;
 }
 
-.alarmInfo p{
-    font-size: 2rem;
+.alarmInfo p {
+  font-size: 2rem;
 }
